@@ -16,3 +16,16 @@
                       [26 8] [27 8] [28 9] [29 9] [30 10]]]
       (doseq [[score expected] test-cases]
         (is (= (ability-modifier score) expected))))))
+
+(deftest test-level-1-hit-points
+  (testing "Level 1 Hit Points by Class" 
+    (let [test-cases [[{:class :barbarian :level 1 :constitution 18} 16]
+                      [{:class :paladin :level 1 :constitution 10} 10]]]
+        (doseq [[character expected] test-cases]
+          (is (= (max-hit-points character) expected))))))
+
+(deftest test-leveled-hit-points
+  (testing "Hit Points from Level Gain"
+    (let [test-cases [[{:class :barbarian :level 4 :constitution 16} 45]]]
+      (doseq [[character expected] test-cases]
+        (is (= (max-hit-points character) expected))))))
